@@ -3,7 +3,70 @@
 
 **Skriv din rapport här!**
 
-_Du kan ta bort all text som finns sedan tidigare_.
+Började med att skapa en second activity. (screen2.java filen)
+
+Därefter skapade jag en button i båda layouts filerna för att senare kunna logga in och ut. 
+
+
+///
+<Button
+android:id="@+id/sign_in_button"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Sign in"
+app:layout_constraintBottom_toTopOf="@+id/login_text"
+app:layout_constraintEnd_toEndOf="parent"
+app:layout_constraintStart_toStartOf="parent"
+/>
+
+///
+
+Jag skapade sedan möjligheten att skicka data mellan de två filerna med intents och extras bundles 
+i mainactivity samt screen2 filerna. Detta för att dessa filer ska kunna skicka data mellan 
+varandra. 
+
+
+///@Override
+public void onClick(View view) {
+Log.d("==>", "MainActivity Sign in button Pressed.");
+Log.d("==>", "Username"+username.getText().toString());
+Intent intent = new Intent(MainActivity.this, screen2.class);
+
+
+                intent.putExtra("username",username.getText().toString());
+                startActivity(intent);
+                intent.putExtra("username",username.getText().toString());
+                startActivity(intent);
+            }
+        });
+///
+Koden ovanför är för mainActivity.java och detta är det som skapar möjligheten att skicka en string
+data över till screen2 filen. 
+///
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_screen2);
+
+        signout = findViewById(R.id.sign_out_button);
+        usernameView = findViewById(R.id.username_text);
+
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        String username = extras.getString("username");
+
+///
+Koden ovanför är det som skapar möjligheten ta emot data från MainActivity.java filen. 
+
+Lade sedan till en edit text (plaintext) för att "användaren" ska kunna skriva in ett användarnamn 
+exempelvis som sedan visas på andra filen vid inloggning. 
+
+
+
+EXEMPEL BILDER FRÅN APPEN
+
+![](android.png)
+![](android2.png)
 
 ## Följande grundsyn gäller dugga-svar:
 
@@ -33,7 +96,7 @@ function errorCallback(error) {
 
 Bilder läggs i samma mapp som markdown-filen.
 
-![](android.png)
+
 
 Läs gärna:
 
